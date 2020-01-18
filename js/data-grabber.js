@@ -27,7 +27,19 @@ xmlhttp.open("GET", "https://www.transparency.treasury.gov/services/api/fiscal_s
 xmlhttp.send(); 
 
 
-
+window.onload = function(){
+    var bsDiv = document.getElementById("hoverInfo");
+    var x, y;
+// On mousemove use event.clientX and event.clientY to set the location of the div to the location of the cursor:
+    window.addEventListener('mousemove', function(event){
+        x = event.clientX;
+        y = event.clientY;                    
+        if ( typeof x !== 'undefined' ){
+            bsDiv.style.left = (x+10) + "px";
+            bsDiv.style.top = y + "px";
+        }
+    }, false);
+}
 function getPres(year){
 	console.log(year);
 	for(i = 0; i < presData.length; i++){
@@ -118,12 +130,14 @@ function done(){
 	var myPlot = document.getElementById('graph');
 	var hoverInfo = document.getElementById('hoverInfo')
 	myPlot.on('plotly_hover', function(data){
+		hoverInfo.style.visibility='visible';
 		var infotext = data.points.map(function(d){
-		  return (d.data.president[d.pointIndex]+': Year= '+d.x+', y= '+d.y.toPrecision(3));
+		  return (d.data.president[d.pointIndex]+', '+d.x);
 		});
 		hoverInfo.innerHTML = infotext.join('<br/>');
 	})
 	 .on('plotly_unhover', function(data){
 		hoverInfo.innerHTML = '';
+		hoverInfo.style.visibility='hidden';
 	});
 }
