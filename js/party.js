@@ -8,6 +8,10 @@ var theData;
 var xmlhttp = new XMLHttpRequest();
 var presData;
 var xmlhttp2 = new XMLHttpRequest();
+var dem = 0;
+var gop = 0;
+var mis = 0;
+
 xmlhttp2.onreadystatechange = function() {
   if (this.readyState == 4 && this.status == 200) {
     var presVar = JSON.parse(this.responseText);
@@ -29,7 +33,29 @@ xmlhttp.send();
 
 
 
-
+function addRange(party, date1, date2){
+	var day1;
+	var day2;
+	var i;
+	for(i=0; i<theData.length;i++){
+		if(theData[i].reporting_calendar_year == date1){
+			day1= theData[i].debt_outstanding_amt;
+		}
+		if(theData[i].reporting_calendar_year == date2){
+			day2= theData[i].debt_outstanding_amt;
+		}
+	}
+	var total = day2 - day1;
+	if(party==0){
+		dem+=total;
+	}
+	if(party==1){
+		gop+=total;
+	}
+	if(party==2){
+		mis+=total;
+	}
+}
 
 
 function done(){
@@ -106,25 +132,43 @@ function done(){
 			}
 			if(party == "Democratic"){
 				rect.fillcolor = "#0051ff";
+				addRange(0, startDate, endDate);
 			}
-			if(party == "Republican"){
+			else if(party == "Republican"){
 				rect.fillcolor = "#ff0000";
+				addRange(1, startDate, endDate);
 			}
-			if(party == "Democratic-Republican"){
+			else if(party == "Democratic-Republican"){
 				rect.fillcolor = "#ff0000";
+				addRange(1, startDate, endDate);
 			}
-			if(party == "Whig"){
+			else if(party == "Whig"){
 				rect.fillcolor = "#f2d707";
+				addRange(2, startDate, endDate);
+			} else {
+				//addRange(2, startDate, endDate);
 			}
 			
 			allShapes.push(rect);
 			allShapes.push(rect_line);
 		}
-		console.log(allShapes);
 		return allShapes;
 	}
 	
 	var gd = [graphData];
 	Plotly.newPlot('graph', gd, layout);
+	
+	var pdata = [{
+		  values: [dem, gop, mis],
+		  labels: ['Democratic', 'Republican', 'Other'],
+		  type: 'pie',
+		  marker: {colors: ['rgb(128, 128, 255)', 'rgb(255, 128, 128)', 'rgb(128, 255, 128)']}
+		}];
+
+		var playout = {
+		  
+		};
+
+		Plotly.newPlot('pieChart', pdata, playout);
 
 }
