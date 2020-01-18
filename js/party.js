@@ -3,10 +3,15 @@
  */
 /**
  * 
- */var theData;
+ */
+var theData;
 var xmlhttp = new XMLHttpRequest();
 var presData;
 var xmlhttp2 = new XMLHttpRequest();
+var dem = 0;
+var gop = 0;
+var mis = 0;
+
 xmlhttp2.onreadystatechange = function() {
   if (this.readyState == 4 && this.status == 200) {
     var presVar = JSON.parse(this.responseText);
@@ -27,36 +32,31 @@ xmlhttp.open("GET", "https://www.transparency.treasury.gov/services/api/fiscal_s
 xmlhttp.send(); 
 
 
-window.onload = function(){
-    var bsDiv = document.getElementById("hoverInfo");
-    var x, y;
-// On mousemove use event.clientX and event.clientY to set the location of the div to the location of the cursor:
-    window.addEventListener('mousemove', function(event){
-        x = event.clientX;
-        y = event.clientY;                    
-        if ( typeof x !== 'undefined' ){
-            bsDiv.style.left = (x+10) + "px";
-            bsDiv.style.top = y + "px";
-        }
-    }, false);
-}
-function getPres(year){
-	console.log(year);
-	for(i = 0; i < presData.length; i++){
-		var startDate = presData[i].took_office.substring(0,4);
-		var endDate = presData[i].left_office;
-		if(endDate == null){
-				endDate = '2019';
+
+function addRange(party, date1, date2){
+	var day1;
+	var day2;
+	var i;
+	for(i=0; i<theData.length;i++){
+		if(theData[i].reporting_calendar_year == date1){
+			day1= theData[i].debt_outstanding_amt;
 		}
-		else{
-			endDate = endDate.substring(0,4)
-		}
-		if( +year >= +startDate && +year <= +endDate){
-			console.log(presData[i].president)
-			return presData[i].president
+		if(theData[i].reporting_calendar_year == date2){
+			day2= theData[i].debt_outstanding_amt;
 		}
 	}
+	var total = day2 - day1;
+	if(party==0){
+		dem+=total;
+	}
+	if(party==1){
+		gop+=total;
+	}
+	if(party==2){
+		mis+=total;
+	}
 }
+
 
 function done(){
 	console.log(presData);
@@ -64,12 +64,14 @@ function done(){
 	var graphData = {
 			  x: [],
 			  y: [],
-			  president:[],
 			  type: 'Scatter',
+			  line: {
+				    color: 'rgb(255, 128, 128)',
+				    width: 4
+				  }
 			};
 	for (i = 0; i < theData.length; i++) {
 		graphData.x.push(theData[i].reporting_calendar_year);
-		graphData.president.push(getPres(theData[i].reporting_calendar_year));
 		graphData.y.push(theData[i].debt_outstanding_amt);
 	} 
 	
@@ -83,7 +85,6 @@ function done(){
 				title: 'Debt in $'
 			},
 			shapes: presStart(),
-			
 			autosize: true,
 			  margin: {
 			    l: 5,
@@ -99,6 +100,7 @@ function done(){
 		for(i = 0; i < presData.length; i++){
 			var startDate = presData[i].took_office.substring(0,4);
 			var endDate = presData[i].left_office;
+			var party = presData[i].party
 			if(endDate == null){
 				endDate = graphData.x[0];
 			}
@@ -113,31 +115,64 @@ function done(){
 					y0: 0,
 					x1: endDate,
 					y1: 1,
-					fillcolor: '#D3D3D3',
-					opacity: 0.1,
+					fillcolor: '#00ff19',
+					opacity: 0.05,
+					line: {
+						width: 0
+					}
+			}
+			var rect_line = {
+					type: 'rect',
+					xref: 'x',
+					yref: 'paper',
+					x0: startDate,
+					y0: 0,
+					x1: endDate,
+					y1: 1,
+					opacity: 0.25,
 					line: {
 						width: 1
 					}
 			}
-			allShapes[i] = rect;
+			if(party == "Democratic"){
+				rect.fillcolor = "#0051ff";
+				addRange(0, startDate, endDate);
+			}
+			else if(party == "Republican"){
+				rect.fillcolor = "#ff0000";
+				addRange(1, startDate, endDate);
+			}
+			else if(party == "Democratic-Republican"){
+				rect.fillcolor = "#ff0000";
+				addRange(1, startDate, endDate);
+			}
+			else if(party == "Whig"){
+				rect.fillcolor = "#f2d707";
+				addRange(2, startDate, endDate);
+			} else {
+				//addRange(2, startDate, endDate);
+			}
+			
+			allShapes.push(rect);
+			allShapes.push(rect_line);
 		}
-		console.log(allShapes);
 		return allShapes;
 	}
 	
 	var gd = [graphData];
 	Plotly.newPlot('graph', gd, layout);
-	var myPlot = document.getElementById('graph');
-	var hoverInfo = document.getElementById('hoverInfo')
-	myPlot.on('plotly_hover', function(data){
-		hoverInfo.style.visibility='visible';
-		var infotext = data.points.map(function(d){
-		  return (d.data.president[d.pointIndex]+', '+d.x);
-		});
-		hoverInfo.innerHTML = infotext.join('<br/>');
-	})
-	 .on('plotly_unhover', function(data){
-		hoverInfo.innerHTML = '';
-		hoverInfo.style.visibility='hidden';
-	});
+	
+	var pdata = [{
+		  values: [dem, gop, mis],
+		  labels: ['Democratic', 'Republican', 'Other'],
+		  type: 'pie',
+		  marker: {colors: ['rgb(128, 128, 255)', 'rgb(255, 128, 128)', 'rgb(128, 255, 128)']}
+		}];
+
+		var playout = {
+		  
+		};
+
+		Plotly.newPlot('pieChart', pdata, playout);
+
 }
