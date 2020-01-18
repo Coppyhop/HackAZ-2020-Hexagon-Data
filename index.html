@@ -1,19 +1,34 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-<script src="js/plotly-latest.min.js"></script>
-<script src="js/data-grabber.js"></script>
-<style>
-table, th, td {
-  border: 1px solid black;
-}
-</style>
-</head>
-<body>
-<div id="graph"></div>
-<h1>Table of US debts annually since 1790</h1>
-<table id="table"></table>
-</body>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<script src="js/plotly-latest.min.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script src="js/data-grabber.js"></script>
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
+		<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-grey.css">
+	</head>
+	<body>
+		<div class="w3-sidebar w3-bar-block w3-card w3-white" style="width:15%">
+			<div class="w3-bar-item w3-xlarge w3-theme-l1 w3-center">US Debt Visualizer</div>
+			<a href="#" class="w3-bar-item w3-button">President</a>
+			<a href="#" class="w3-bar-item w3-button">Party</a>
+			<a href="#" class="w3-bar-item w3-button">Historical</a>
+			<a href="#" class="w3-bar-item w3-button">Future</a></div>
+		<div class="w3-main" style="margin-left:15%">
+		<div class="w3-card w3-theme">
+			<div class="w3-container w3-xxlarge">
+		    	US Debt Graph
+		  	</div>
+			<div class="w3-container w3-large">
+			 	Breakdown by president
+			</div>
+		</div>
+		<div class="w3-panel">
+		    <div id="graph" class="w3-card" style="height:50%"></div>
+				<hr>
+			</div>
+			</div>
+	</body>
 </html>
