@@ -102,7 +102,7 @@ function done(){
 			var endDate = presData[i].left_office;
 			var party = presData[i].party
 			if(endDate == null){
-				endDate = graphData.x[0];
+				endDate = "2019";
 			}
 			else{
 				endDate = endDate.substring(0,4)
