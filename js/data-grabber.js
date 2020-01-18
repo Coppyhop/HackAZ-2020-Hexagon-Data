@@ -29,8 +29,23 @@ xmlhttp.send();
 
 
 
-
-
+function getPres(year){
+	console.log(year);
+	for(i = 0; i < presData.length; i++){
+		var startDate = presData[i].took_office.substring(0,4);
+		var endDate = presData[i].left_office;
+		if(endDate == null){
+				endDate = '2019';
+		}
+		else{
+			endDate = endDate.substring(0,4)
+		}
+		if( +year >= +startDate && +year <= +endDate){
+			console.log(presData[i].president)
+			return presData[i].president
+		}
+	}
+}
 
 function done(){
 	console.log(presData);
@@ -38,10 +53,12 @@ function done(){
 	var graphData = {
 			  x: [],
 			  y: [],
+			  president:[],
 			  type: 'Scatter',
 			};
 	for (i = 0; i < theData.length; i++) {
 		graphData.x.push(theData[i].reporting_calendar_year);
+		graphData.president.push(getPres(theData[i].reporting_calendar_year));
 		graphData.y.push(theData[i].debt_outstanding_amt);
 	} 
 	
@@ -55,6 +72,7 @@ function done(){
 				title: 'Debt in $'
 			},
 			shapes: presStart(),
+			
 			autosize: true,
 			  margin: {
 			    l: 5,
@@ -98,5 +116,15 @@ function done(){
 	
 	var gd = [graphData];
 	Plotly.newPlot('graph', gd, layout);
-
+	var myPlot = document.getElementById('graph');
+	var hoverInfo = document.getElementById('hoverInfo')
+	myPlot.on('plotly_hover', function(data){
+		var infotext = data.points.map(function(d){
+		  return (d.data.president[d.pointIndex]+': Year= '+d.x+', y= '+d.y.toPrecision(3));
+		});
+		hoverInfo.innerHTML = infotext.join('<br/>');
+	})
+	 .on('plotly_unhover', function(data){
+		hoverInfo.innerHTML = '';
+	});
 }
