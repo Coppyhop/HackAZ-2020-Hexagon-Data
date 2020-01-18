@@ -20,7 +20,7 @@ xmlhttp.onreadystatechange = function() {
   if (this.readyState == 4 && this.status == 200) {
     var myArr = JSON.parse(this.responseText);
    theData=myArr.data;
-   xmlhttp2.open("GET", "https://coppyhop.com/stuff/wars.json", true);
+   xmlhttp2.open("GET", "https://raw.githubusercontent.com/Coppyhop/HackAZ-2020-Hexagon-Data/kyle-test/js/wars.json", true);
    xmlhttp2.send(); 
   }
 };
