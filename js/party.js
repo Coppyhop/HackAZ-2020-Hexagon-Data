@@ -65,6 +65,10 @@ function done(){
 			  x: [],
 			  y: [],
 			  type: 'Scatter',
+			  line: {
+				    color: 'rgb(255, 128, 128)',
+				    width: 4
+				  }
 			};
 	for (i = 0; i < theData.length; i++) {
 		graphData.x.push(theData[i].reporting_calendar_year);
