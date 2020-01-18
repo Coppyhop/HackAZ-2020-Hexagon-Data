@@ -94,7 +94,7 @@ function done(){
 	
 	var layout = {
 			showLegend: true,
-			title:'Total Debt of the United States 1790-2019',
+			title:'Total Debt of the United States 1790-Today',
 			xaxis: {
 				title: 'Year'
 			},

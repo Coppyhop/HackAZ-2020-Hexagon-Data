@@ -7,6 +7,7 @@
 var theData;
 var theData2;
 var theData3;
+var theData4;
 var xmlhttp = new XMLHttpRequest();
 var presData;
 var xmlhttp2 = new XMLHttpRequest();
@@ -62,16 +63,29 @@ function done(){
 				    width: 4
 				  }
 			};
+	
+	var graphData4 = {
+			  x: [],
+			  y: [],
+			  type: 'Scatter',
+			  line: {
+				    color: 'rgb(255, 128, 128)',
+				    width: 4
+				  }
+			};
 	for (i = 0; i < theData.length; i++) {
 		if(Number(theData[i].reporting_calendar_year)<=1860){
 			graphData.x.push(theData[i].reporting_calendar_year);
 			graphData.y.push(theData[i].debt_outstanding_amt);
-		} else if(Number(theData[i].reporting_calendar_year)<=1960){
+		} else if(Number(theData[i].reporting_calendar_year)<=1940){
 			graphData2.x.push(theData[i].reporting_calendar_year);
 			graphData2.y.push(theData[i].debt_outstanding_amt);
-		} else {
+		} else if(Number(theData[i].reporting_calendar_year)<=1980){
 			graphData3.x.push(theData[i].reporting_calendar_year);
 			graphData3.y.push(theData[i].debt_outstanding_amt);
+		} else {
+			graphData4.x.push(theData[i].reporting_calendar_year);
+			graphData4.y.push(theData[i].debt_outstanding_amt);
 		}
 	} 
 	
@@ -96,7 +110,7 @@ function done(){
 	
 	var layout2 = {
 			showLegend: true,
-			title:'Total Debt of the United States 1860-1960',
+			title:'Total Debt of the United States 1860-1940',
 			xaxis: {
 				title: 'Year'
 			},
@@ -115,7 +129,7 @@ function done(){
 	
 	var layout3 = {
 			showLegend: true,
-			title:'Total Debt of the United States 1960-Today',
+			title:'Total Debt of the United States 1940-1980',
 			xaxis: {
 				title: 'Year'
 			},
@@ -132,13 +146,32 @@ function done(){
 			  }
 	};
 
-	
+	var layout4 = {
+			showLegend: true,
+			title:'Total Debt of the United States 1980-Today',
+			xaxis: {
+				title: 'Year'
+			},
+			yaxis: {
+				title: 'Debt in $'
+			},
+			autosize: true,
+			  margin: {
+			    l: 5,
+			    r: 5,
+			    b: 50,
+			    t: 50,
+			    pad: 4
+			  }
+	};
 	var gd = [graphData];
 	var gd2 = [graphData2];
 	var gd3 = [graphData3];
+	var gd4 = [graphData4];
 	Plotly.newPlot('graph', gd, layout);
 	Plotly.newPlot('graph2', gd2, layout2);
 	Plotly.newPlot('graph3', gd3, layout3);
+	Plotly.newPlot('graph4', gd4, layout4);
 	
 
 }
