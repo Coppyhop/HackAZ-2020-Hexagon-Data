@@ -77,7 +77,7 @@ function done(){
 	
 	var layout = {
 			showLegend: true,
-			title:'Total Debt of the United States 1790-2019',
+			title:'Total Debt of the United States 1790-Today',
 			xaxis: {
 				title: 'Year'
 			},
@@ -102,7 +102,7 @@ function done(){
 			var endDate = presData[i].left_office;
 			var party = presData[i].party
 			if(endDate == null){
-				endDate = graphData.x[0];
+				endDate = "2019";
 			}
 			else{
 				endDate = endDate.substring(0,4)

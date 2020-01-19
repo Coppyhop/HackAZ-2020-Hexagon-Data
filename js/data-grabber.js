@@ -4,9 +4,28 @@
 /**
  * 
  */var theData;
+var presMoney = [];
+var presNames = [];
 var xmlhttp = new XMLHttpRequest();
 var presData;
 var xmlhttp2 = new XMLHttpRequest();
+
+function addRange(date1, date2){
+	var day1;
+	var day2;
+	var i;
+	for(i=0; i<theData.length;i++){
+		if(theData[i].reporting_calendar_year == date1){
+			day1= theData[i].debt_outstanding_amt;
+		}
+		if(theData[i].reporting_calendar_year == date2){
+			day2= theData[i].debt_outstanding_amt;
+		}
+	}
+	var total = day2 - day1;
+	presMoney.push(total);
+}
+
 xmlhttp2.onreadystatechange = function() {
   if (this.readyState == 4 && this.status == 200) {
     var presVar = JSON.parse(this.responseText);
@@ -66,6 +85,10 @@ function done(){
 			  y: [],
 			  president:[],
 			  type: 'Scatter',
+			  line: {
+				    color: 'rgb(255, 128, 128)',
+				    width: 4
+				  }
 			};
 	for (i = 0; i < theData.length; i++) {
 		graphData.x.push(theData[i].reporting_calendar_year);
@@ -75,7 +98,7 @@ function done(){
 	
 	var layout = {
 			showLegend: true,
-			title:'Total Debt of the United States 1790-2019',
+			title:'Total Debt of the United States 1790-Today',
 			xaxis: {
 				title: 'Year'
 			},
@@ -100,11 +123,13 @@ function done(){
 			var startDate = presData[i].took_office.substring(0,4);
 			var endDate = presData[i].left_office;
 			if(endDate == null){
-				endDate = graphData.x[0];
+				endDate = "2019";
 			}
 			else{
 				endDate = endDate.substring(0,4)
 			}
+			addRange(startDate, endDate);
+			presNames.push(presData[i].president);
 			var rect = {
 					type: 'rect',
 					xref: 'x',
@@ -140,4 +165,17 @@ function done(){
 		hoverInfo.innerHTML = '';
 		hoverInfo.style.visibility='hidden';
 	});
+	
+
+	var pdata = [{
+		  values: presMoney,
+		  labels:presNames,
+		  type: 'pie'
+			  
+		}];
+		var playout = {
+		  
+		};
+
+		Plotly.newPlot('pieChart', pdata, playout);
 }
