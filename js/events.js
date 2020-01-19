@@ -5,6 +5,7 @@
  * 
  * Handles the data for the page with specific graphs for timelines
  */
+//Various variables to hold our data
 var theData;
 var theData2;
 var theData3;
@@ -12,6 +13,7 @@ var theData4;
 var xmlhttp = new XMLHttpRequest();
 var presData;
 var xmlhttp2 = new XMLHttpRequest();
+//Http Requests
 xmlhttp2.onreadystatechange = function() {
   	if (this.readyState == 4 && this.status == 200) {
     	var presVar = JSON.parse(this.responseText);
@@ -29,8 +31,8 @@ xmlhttp.onreadystatechange = function() {
 };
 xmlhttp.open("GET", "https://www.transparency.treasury.gov/services/api/fiscal_service/v1/accounting/od/debt_outstanding?sort=-data_date&page[number]=1&page[size]=300", true);
 xmlhttp.send(); 
+//Called once HTTP requests have finished
 function done(){
-	console.log(presData);
 	var i;
 	var graphData = {
 			  x: [],

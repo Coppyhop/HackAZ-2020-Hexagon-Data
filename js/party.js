@@ -14,8 +14,6 @@ var xmlhttp2 = new XMLHttpRequest();
 var dem = 0;
 var gop = 0;
 var mis = 0;
-
-
 //Things that are called on page load
 xmlhttp2.onreadystatechange = function() {
   	if (this.readyState == 4 && this.status == 200) {
@@ -34,8 +32,6 @@ xmlhttp.onreadystatechange = function() {
 };
 xmlhttp.open("GET", "https://www.transparency.treasury.gov/services/api/fiscal_service/v1/accounting/od/debt_outstanding?sort=-data_date&page[number]=1&page[size]=300", true);
 xmlhttp.send(); 
-
-
 //Adds money to a specific party's tally based on the date range given
 function addRange(party, date1, date2){
 	var day1;
@@ -60,10 +56,8 @@ function addRange(party, date1, date2){
 		mis+=total;
 	}
 }
-
 //Called once the two http requests are finished
 function done(){
-	console.log(presData);
 	var i;
 	var graphData = {
 			x: [],

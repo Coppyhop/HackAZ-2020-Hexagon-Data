@@ -5,10 +5,12 @@
  * 
  * Handles the functionality of the current debt (estimation) page
  */
+//Variables for holding data
 var theData;
 var xmlhttp = new XMLHttpRequest();
 var presData;
 var xmlhttp2 = new XMLHttpRequest();
+//HTTP Requests
 xmlhttp2.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       var presVar = JSON.parse(this.responseText);
@@ -26,6 +28,7 @@ xmlhttp.onreadystatechange = function() {
 };
 xmlhttp.open("GET", "https://www.transparency.treasury.gov/services/api/fiscal_service/v1/accounting/od/debt_to_penny?sort=-data_date&page[number]=1&page[size]=720", true);
 xmlhttp.send(); 
+//Called once the HTTP requests are finished
 function done(){
   var currentDebt = +theData[0].tot_pub_debt_out_amt;
   var changeOfDebt = 0;

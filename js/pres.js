@@ -6,12 +6,14 @@
  * 
  * Handles the hover, graph, and misc functionality of the presidents page
  */
+//Variables for the data we need
 var theData;
 var presMoney = [];
 var presNames = [];
 var xmlhttp = new XMLHttpRequest();
 var presData;
 var xmlhttp2 = new XMLHttpRequest();
+//Adds the range of dates to the president money list
 function addRange(date1, date2){
 	var day1;
 	var day2;
@@ -27,6 +29,7 @@ function addRange(date1, date2){
 	var total = day2 - day1;
 	presMoney.push(total);
 }
+//Http requests
 xmlhttp2.onreadystatechange = function() {
   if (this.readyState == 4 && this.status == 200) {
     var presVar = JSON.parse(this.responseText);
@@ -44,6 +47,7 @@ xmlhttp.onreadystatechange = function() {
 };
 xmlhttp.open("GET", "https://www.transparency.treasury.gov/services/api/fiscal_service/v1/accounting/od/debt_outstanding?sort=-data_date&page[number]=1&page[size]=300", true);
 xmlhttp.send(); 
+//Attaches a listener to update the position of the label for the name
 window.onload = function(){
     var bsDiv = document.getElementById("hoverInfo");
     var x, y;
@@ -56,6 +60,7 @@ window.onload = function(){
         }
     }, false);
 }
+//Returns the president in the given year
 function getPres(year){
 	console.log(year);
 	for(i = 0; i < presData.length; i++){
@@ -73,8 +78,8 @@ function getPres(year){
 		}
 	}
 }
+//Called when the HTTP requests are finished
 function done(){
-	console.log(presData);
 	var i;
 	var graphData = {
 			  x: [],
