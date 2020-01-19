@@ -1,9 +1,12 @@
 /**
+ * Party.js
+ * Authors:
+ * Marko Kreso and Coppy (Kyle) Bredenkamp
  * 
+ * This represents the code required to make the party page work viewport wise
  */
-/**
- * 
- */
+
+ //variables
 var theData;
 var xmlhttp = new XMLHttpRequest();
 var presData;
@@ -11,28 +14,25 @@ var xmlhttp2 = new XMLHttpRequest();
 var dem = 0;
 var gop = 0;
 var mis = 0;
-
+//Things that are called on page load
 xmlhttp2.onreadystatechange = function() {
-  if (this.readyState == 4 && this.status == 200) {
-    var presVar = JSON.parse(this.responseText);
-    presData= presVar;
-    done();
+  	if (this.readyState == 4 && this.status == 200) {
+    	var presVar = JSON.parse(this.responseText);
+    	presData= presVar;
+    	done();
   }
- 
 };
 xmlhttp.onreadystatechange = function() {
-  if (this.readyState == 4 && this.status == 200) {
-    var myArr = JSON.parse(this.responseText);
-   theData=myArr.data;
-   xmlhttp2.open("GET", "https://raw.githubusercontent.com/hitch17/sample-data/master/presidents.json", true);
-   xmlhttp2.send(); 
-  }
+	if (this.readyState == 4 && this.status == 200) {
+		var myArr = JSON.parse(this.responseText);
+   		theData=myArr.data;
+   		xmlhttp2.open("GET", "https://raw.githubusercontent.com/hitch17/sample-data/master/presidents.json", true);
+   		xmlhttp2.send(); 
+  	}
 };
 xmlhttp.open("GET", "https://www.transparency.treasury.gov/services/api/fiscal_service/v1/accounting/od/debt_outstanding?sort=-data_date&page[number]=1&page[size]=300", true);
 xmlhttp.send(); 
-
-
-
+//Adds money to a specific party's tally based on the date range given
 function addRange(party, date1, date2){
 	var day1;
 	var day2;
@@ -56,25 +56,22 @@ function addRange(party, date1, date2){
 		mis+=total;
 	}
 }
-
-
+//Called once the two http requests are finished
 function done(){
-	console.log(presData);
 	var i;
 	var graphData = {
-			  x: [],
-			  y: [],
-			  type: 'Scatter',
-			  line: {
-				    color: 'rgb(255, 128, 128)',
-				    width: 4
-				  }
-			};
+			x: [],
+			y: [],
+			type: 'Scatter',
+			line: {
+				color: 'rgb(255, 128, 128)',
+				width: 4
+				}
+		};
 	for (i = 0; i < theData.length; i++) {
 		graphData.x.push(theData[i].reporting_calendar_year);
 		graphData.y.push(theData[i].debt_outstanding_amt);
 	} 
-	
 	var layout = {
 			showLegend: true,
 			title:'Total Debt of the United States 1790-Today',
@@ -86,15 +83,14 @@ function done(){
 			},
 			shapes: presStart(),
 			autosize: true,
-			  margin: {
+			  	margin: {
 			    l: 5,
 			    r: 5,
 			    b: 50,
 			    t: 50,
 			    pad: 4
-			  }
+			}
 	};
-	
 	function presStart(){
 		var allShapes = [];
 		for(i = 0; i < presData.length; i++){
@@ -152,27 +148,18 @@ function done(){
 			} else {
 				//addRange(2, startDate, endDate);
 			}
-			
 			allShapes.push(rect);
 			allShapes.push(rect_line);
 		}
 		return allShapes;
 	}
-	
 	var gd = [graphData];
 	Plotly.newPlot('graph', gd, layout);
-	
 	var pdata = [{
 		  values: [dem, gop, mis],
 		  labels: ['Democratic', 'Republican', 'Other'],
 		  type: 'pie',
 		  marker: {colors: ['rgb(128, 128, 255)', 'rgb(255, 128, 128)', 'rgb(128, 255, 128)']}
 		}];
-
-		var playout = {
-		  
-		};
-
-		Plotly.newPlot('pieChart', pdata, playout);
-
+	Plotly.newPlot('pieChart', pdata);
 }
