@@ -1,0 +1,254 @@
+{
+    "data": [
+        {
+            "State": "Wyoming",
+            "debt": 769721,
+            "Pop": 567025
+        },
+        {
+            "State": "Nebraska",
+            "debt": 2014523,
+            "Pop": 1952570
+        },
+        {
+            "State": "Montana",
+            "debt": 2795614,
+            "Pop": 1086759
+        },
+        {
+            "State": "North Dakota",
+            "debt": 2885664,
+            "Pop": 761723
+        },
+        {
+            "State": "Nevada",
+            "debt": 3248814,
+            "Pop": 3139658
+        },
+        {
+            "State": "Idaho",
+            "debt": 3369178,
+            "Pop": 1826156
+        },
+        {
+            "State": "Vermont",
+            "debt": 3502960,
+            "Pop": 628061
+        },
+        {
+            "State": "South Dakota",
+            "debt": 3527703,
+            "Pop": 903027
+        },
+        {
+            "State": "Delaware",
+            "debt": 4561576,
+            "Pop": 982895
+        },
+        {
+            "State": "Maine",
+            "debt": 4750384,
+            "Pop": 1345790
+        },
+        {
+            "State": "Arkansas",
+            "debt": 4801939,
+            "Pop": 3038999
+        },
+        {
+            "State": "Alaska",
+            "debt": 5921713,
+            "Pop": 734002
+        },
+        {
+            "State": "Tennessee",
+            "debt": 6127422,
+            "Pop": 6897576
+        },
+        {
+            "State": "Iowa",
+            "debt": 6149694,
+            "Pop": 3179849
+        },
+        {
+            "State": "New Mexico",
+            "debt": 7057656,
+            "Pop": 2096640
+        },
+        {
+            "State": "Utah",
+            "debt": 7453346,
+            "Pop": 3282115
+        },
+        {
+            "State": "Mississippi",
+            "debt": 7470178,
+            "Pop": 2989260
+        },
+        {
+            "State": "Kansas",
+            "debt": 7538475,
+            "Pop": 2910357
+        },
+        {
+            "State": "West Virginia",
+            "debt": 7547010,
+            "Pop": 1778070
+        },
+        {
+            "State": "New Hampshire",
+            "debt": 7739447,
+            "Pop": 1371246
+        },
+        {
+            "State": "Oklahoma",
+            "debt": 8457322,
+            "Pop": 3954821
+        },
+        {
+            "State": "Alabama",
+            "debt": 8772871,
+            "Pop": 4908621
+        },
+        {
+            "State": "Rhode Island",
+            "debt": 8932377,
+            "Pop": 1056161
+        },
+        {
+            "State": "Hawaii",
+            "debt": 9656278,
+            "Pop": 1412687
+        },
+        {
+            "State": "Oregon",
+            "debt": 12656643,
+            "Pop": 4301089
+        },
+        {
+            "State": "Georgia",
+            "debt": 13050862,
+            "Pop": 10736059
+        },
+        {
+            "State": "Arizona",
+            "debt": 14291349,
+            "Pop": 7378494
+        },
+        {
+            "State": "Kentucky",
+            "debt": 14403514,
+            "Pop": 4499692
+        },
+        {
+            "State": "South Carolina",
+            "debt": 15744638,
+            "Pop": 5210095
+        },
+        {
+            "State": "North Carolina",
+            "debt": 16310177,
+            "Pop": 10611862
+        },
+        {
+            "State": "Minnesota",
+            "debt": 16363418,
+            "Pop": 5700671
+        },
+        {
+            "State": "Colorado",
+            "debt": 16980689,
+            "Pop": 5845526
+        },
+        {
+            "State": "Louisiana",
+            "debt": 18092508,
+            "Pop": 4645184
+        },
+        {
+            "State": "Missouri",
+            "debt": 18419751,
+            "Pop": 6169270
+        },
+        {
+            "State": "Indiana",
+            "debt": 21842716,
+            "Pop": 6745354
+        },
+        {
+            "State": "Wisconsin",
+            "debt": 23252381,
+            "Pop": 5851754
+        },
+        {
+            "State": "Virginia",
+            "debt": 27825929,
+            "Pop": 8626207
+        },
+        {
+            "State": "Maryland",
+            "debt": 28027363,
+            "Pop": 6083116
+        },
+        {
+            "State": "Florida",
+            "debt": 28823847,
+            "Pop": 21992985
+        },
+        {
+            "State": "Washington",
+            "debt": 33427752,
+            "Pop": 7797095
+        },
+        {
+            "State": "Michigan",
+            "debt": 33463604,
+            "Pop": 10045029
+        },
+        {
+            "State": "Ohio",
+            "debt": 33493235,
+            "Pop": 11747694
+        },
+        {
+            "State": "Connecticut",
+            "debt": 38756156,
+            "Pop": 3563077
+        },
+        {
+            "State": "Pennsylvania",
+            "debt": 47519575,
+            "Pop": 12820878
+        },
+        {
+            "State": "Texas",
+            "debt": 50963262,
+            "Pop": 29472295
+        },
+        {
+            "State": "Illinois",
+            "debt": 61821319,
+            "Pop": 12659682
+        },
+        {
+            "State": "New Jersey",
+            "debt": 65874095,
+            "Pop": 8936574
+        },
+        {
+            "State": "Massachusetts",
+            "debt": 77043165,
+            "Pop": 6976597
+        },
+        {
+            "State": "New York",
+            "debt": 139234923,
+            "Pop": 19440469
+        },
+        {
+            "State": "California",
+            "debt": 152772292,
+            "Pop": 39937489
+        }
+    ]
+}
