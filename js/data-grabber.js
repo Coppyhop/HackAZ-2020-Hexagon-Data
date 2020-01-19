@@ -170,11 +170,12 @@ function done(){
 	var pdata = [{
 		  values: presMoney,
 		  labels:presNames,
-		  type: 'pie'
+		  type: 'pie',
+		  textinfo:"none"
 			  
 		}];
 		var playout = {
-		  
+				textInfo:"none"
 		};
 
 		Plotly.newPlot('pieChart', pdata, playout);
