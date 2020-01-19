@@ -7,33 +7,25 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<script src="js/data-grabber.js"></script>
 		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	</head>
 	<body>
-		<div class="w3-sidebar w3-bar-block w3-card w3-white" style="width:15%">
-			<div class="w3-bar-item w3-xlarge w3-theme-l1 w3-amber w3-card w3-center"style="text-shadow:4px 4px 4px #444">US Debt Graph</div>
-			<a href="#" class="w3-bar-item w3-button">President</a>
-			<a href="party.html" class="w3-bar-item w3-button">Party</a>
-			<a href="events.html" class="w3-bar-item w3-button">Historical</a>
-			<a href="future.html" class="w3-bar-item w3-button">Future</a></div>
-		<div class="w3-main" style="margin-left:15%">
-		<div class="w3-theme w3-center">
-			<div class="w3-container w3-xxlarge">
-		    	Breakdown by president
-		  	</div>
+		<div class="w3-amber w3-card" style="width:100%; height:10%">
+				<div class="w3-yellow w3-card w3-top">
+				<div class="w3-xxlarge w3-amber w3-center w3-card">US Debt Graph</div>
+				<div>
+				<div class="w3-bar-item w3-button w3-disabled">Current Debt</div>
+				<a href="pres.html" class="w3-bar-item w3-button">Presidential</a>
+				<a href="party.html" class="w3-bar-item w3-button">Party</a>
+				<a href="history.html" class="w3-bar-item w3-button">Hisorical Views</a>
+				</div>
+				</div>
+
+			
 		</div>
-		<div class="w3-panel">
-		    <div id="graph" class="w3-card w3-white" style="height:50%"></div>
-		    <div id="hoverInfo" class="w3-card w3-white w3-padding" style="position: absolute;visibility:hidden;"></div>
-				<hr>
-							<div class="w3-card">
-			<h3 class="w3-center">Debt Contributions by president</h3>
-			<div id="pieChart" style="height:50%"></div>
-			<h6 class="w3-center">Note: This is based on president's term, and it a rough number.</h6>
-			</div>
-			</div>
-					<div class="w3-container w3-center">
-		<h6>All Data is sourced from the US treasury</h6>
-		</div>
+
+		<div class="w3-main" style="margin-top:7%">
+
 			</div>
 
 	</body>
