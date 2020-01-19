@@ -1,17 +1,20 @@
 /**
+ * Future.js
+ * Authors:
+ * Marko Kreso and Coppy (Kyle) Bredenkamp
  * 
- */var theData;
+ * Handles the functionality of the current debt (estimation) page
+ */
+var theData;
 var xmlhttp = new XMLHttpRequest();
 var presData;
 var xmlhttp2 = new XMLHttpRequest();
-
 xmlhttp2.onreadystatechange = function() {
-  if (this.readyState == 4 && this.status == 200) {
-    var presVar = JSON.parse(this.responseText);
-    presData= presVar;
-    done();
+    if (this.readyState == 4 && this.status == 200) {
+      var presVar = JSON.parse(this.responseText);
+      presData= presVar;
+      done();
   }
- 
 };
 xmlhttp.onreadystatechange = function() {
   if (this.readyState == 4 && this.status == 200) {
@@ -23,7 +26,6 @@ xmlhttp.onreadystatechange = function() {
 };
 xmlhttp.open("GET", "https://www.transparency.treasury.gov/services/api/fiscal_service/v1/accounting/od/debt_to_penny?sort=-data_date&page[number]=1&page[size]=720", true);
 xmlhttp.send(); 
-
 function done(){
   var currentDebt = +theData[0].tot_pub_debt_out_amt;
   var changeOfDebt = 0;
@@ -36,10 +38,8 @@ function done(){
   avgChangeOfDebt = avgChangeOfDebt/86400;
   avgChangeOfDebt = avgChangeOfDebt/20;
   var millisecondsToWait = 50;
-window.setInterval(function() {
-  console.log("TEST");
+  window.setInterval(function() {
   currentDebt += avgChangeOfDebt;
   document.getElementById("debt").innerHTML = "$" + Math.round(currentDebt).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");;
   }, millisecondsToWait);
-
 }

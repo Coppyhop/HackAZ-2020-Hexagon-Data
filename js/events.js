@@ -1,8 +1,9 @@
 /**
+ * Events.js
+ * Author:
+ * Coppy (Kyle) Bredenkamp
  * 
- */
-/**
- * 
+ * Handles the data for the page with specific graphs for timelines
  */
 var theData;
 var theData2;
@@ -12,25 +13,22 @@ var xmlhttp = new XMLHttpRequest();
 var presData;
 var xmlhttp2 = new XMLHttpRequest();
 xmlhttp2.onreadystatechange = function() {
-  if (this.readyState == 4 && this.status == 200) {
-    var presVar = JSON.parse(this.responseText);
-    presData= presVar;
-    done();
-  }
- 
+  	if (this.readyState == 4 && this.status == 200) {
+    	var presVar = JSON.parse(this.responseText);
+    	presData= presVar;
+    	done();
+  	}
 };
 xmlhttp.onreadystatechange = function() {
-  if (this.readyState == 4 && this.status == 200) {
-    var myArr = JSON.parse(this.responseText);
-   theData=myArr.data;
-   xmlhttp2.open("GET", "https://raw.githubusercontent.com/hitch17/sample-data/master/presidents.json", true);
-   xmlhttp2.send(); 
-  }
+  	if (this.readyState == 4 && this.status == 200) {
+    	var myArr = JSON.parse(this.responseText);
+   		theData=myArr.data;
+   		xmlhttp2.open("GET", "https://raw.githubusercontent.com/hitch17/sample-data/master/presidents.json", true);
+   		xmlhttp2.send(); 
+  	}
 };
 xmlhttp.open("GET", "https://www.transparency.treasury.gov/services/api/fiscal_service/v1/accounting/od/debt_outstanding?sort=-data_date&page[number]=1&page[size]=300", true);
 xmlhttp.send(); 
-
-
 function done(){
 	console.log(presData);
 	var i;
@@ -43,7 +41,6 @@ function done(){
 				    width: 4
 				  }
 			};
-	
 	var graphData2 = {
 			  x: [],
 			  y: [],
@@ -53,7 +50,6 @@ function done(){
 				    width: 4
 				  }
 			};
-	
 	var graphData3 = {
 			  x: [],
 			  y: [],
@@ -63,7 +59,6 @@ function done(){
 				    width: 4
 				  }
 			};
-	
 	var graphData4 = {
 			  x: [],
 			  y: [],
@@ -88,7 +83,6 @@ function done(){
 			graphData4.y.push(theData[i].debt_outstanding_amt);
 		}
 	} 
-	
 	var layout = {
 			showLegend: true,
 			title:'Total Debt of the United States 1790-1860',
@@ -107,7 +101,6 @@ function done(){
 			    pad: 4
 			  }
 	};
-	
 	var layout2 = {
 			showLegend: true,
 			title:'Total Debt of the United States 1860-1940',
@@ -126,7 +119,6 @@ function done(){
 			    pad: 4
 			  }
 	};
-	
 	var layout3 = {
 			showLegend: true,
 			title:'Total Debt of the United States 1940-1980',
@@ -145,7 +137,6 @@ function done(){
 			    pad: 4
 			  }
 	};
-
 	var layout4 = {
 			showLegend: true,
 			title:'Total Debt of the United States 1980-Today',
@@ -172,6 +163,4 @@ function done(){
 	Plotly.newPlot('graph2', gd2, layout2);
 	Plotly.newPlot('graph3', gd3, layout3);
 	Plotly.newPlot('graph4', gd4, layout4);
-	
-
 }
