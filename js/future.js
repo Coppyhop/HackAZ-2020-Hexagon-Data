@@ -1,10 +1,6 @@
 /**
  * 
- */
-/**
- * 
- */
-var theData;
+ */var theData;
 var xmlhttp = new XMLHttpRequest();
 var presData;
 var xmlhttp2 = new XMLHttpRequest();
@@ -25,10 +21,25 @@ xmlhttp.onreadystatechange = function() {
    xmlhttp2.send(); 
   }
 };
-xmlhttp.open("GET", "https://www.transparency.treasury.gov/services/api/fiscal_service/v1/accounting/od/debt_outstanding?sort=-data_date&page[number]=1&page[size]=300", true);
+xmlhttp.open("GET", "https://www.transparency.treasury.gov/services/api/fiscal_service/v1/accounting/od/debt_to_penny?sort=-data_date&page[number]=1&page[size]=720", true);
 xmlhttp.send(); 
 
 function done(){
-	
+  var currentDebt = +theData[0].tot_pub_debt_out_amt;
+  var changeOfDebt = 0;
+	for(i = 0; i < theData.length-1; i++){
+    var current = +theData[i].tot_pub_debt_out_amt;
+    var prev = +theData[i+1].tot_pub_debt_out_amt;
+    changeOfDebt += (current - prev);
+  }
+  var avgChangeOfDebt = changeOfDebt/720;
+  avgChangeOfDebt = avgChangeOfDebt/86400;
+  avgChangeOfDebt = avgChangeOfDebt/20;
+  var millisecondsToWait = 50;
+window.setInterval(function() {
+  console.log("TEST");
+  currentDebt += avgChangeOfDebt;
+  document.getElementById("debt").innerHTML = "$" + Math.round(currentDebt).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");;
+  }, millisecondsToWait);
 
 }

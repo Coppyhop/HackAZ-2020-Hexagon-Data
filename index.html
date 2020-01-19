@@ -5,28 +5,34 @@
 		<title>US Debt Graph</title>
 		<script src="js/plotly-latest.min.js"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<script src="js/data-grabber.js"></script>
+		<script src="js/future.js"></script>
 		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	</head>
 	<body>
 		<div class="w3-amber w3-card" style="width:100%; height:10%">
-				<div class="w3-yellow w3-card w3-top">
-				<div class="w3-xxlarge w3-amber w3-center w3-card">US Debt Graph</div>
+				<div class="w3-pale-blue w3-card w3-top">
+				<div class="w3-xxlarge w3-blue-grey w3-center w3-card">US Debt Graph</div>
 				<div>
 				<div class="w3-bar-item w3-button w3-disabled">Current Debt</div>
 				<a href="pres.html" class="w3-bar-item w3-button">Presidential</a>
 				<a href="party.html" class="w3-bar-item w3-button">Party</a>
-				<a href="history.html" class="w3-bar-item w3-button">Hisorical Views</a>
+				<a href="history.html" class="w3-bar-item w3-button">Historical Views</a>
 				</div>
 				</div>
 
 			
 		</div>
 
-		<div class="w3-main" style="margin-top:7%">
-
-			</div>
-
+		<div class="w3-main" style="margin-top:7%">'
+		<div class="w3-center">
+			<div class="w3-container w3-xxlarge">
+		    	Current US Debt*
+		  	</div>
+		<div id="debt" style="font-size: 5em; color:crimson"></div>
+			</div></div>
+		<p class="w3-padding w3-center">Boy, the US's debt sure rises fast! But has it always been that way? We invite you to explore the US's history of debt throughout the various views and graphs we provide to you. You will be able to see what presidents had the most debt increases, what party had the most debt in their terms, and even explore the spikes in historic world events. Did you know that in 1835 the US paid of all its debt? Find things like this out using the graphs here!
+		Note: This data is sourced from the US Treasury itself using their APIs. Any and all data presented is factual, this site aims to take no position politically and merely just gives the data available publicly an easier to read form.</p>
+		<div class="w3-center w3-tiny">*Approximation, Treasury updates data daily</div>
 	</body>
 </html>
