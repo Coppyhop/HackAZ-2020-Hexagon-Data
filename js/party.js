@@ -159,7 +159,8 @@ function done(){
 		  values: [dem, gop, mis],
 		  labels: ['Democratic', 'Republican', 'Other'],
 		  type: 'pie',
-		  marker: {colors: ['rgb(128, 128, 255)', 'rgb(255, 128, 128)', 'rgb(128, 255, 128)']}
+		  marker: {colors: ['rgb(128, 128, 255)', 'rgb(255, 128, 128)', 'rgb(128, 255, 128)']},
+		  textinfo:"none"  
 		}];
 	Plotly.newPlot('pieChart', pdata);
 }
