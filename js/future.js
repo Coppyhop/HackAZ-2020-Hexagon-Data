@@ -26,15 +26,15 @@ xmlhttp.onreadystatechange = function() {
    xmlhttp2.send(); 
   }
 };
-xmlhttp.open("GET", "https://www.transparency.treasury.gov/services/api/fiscal_service/v1/accounting/od/debt_to_penny?sort=-data_date&page[number]=1&page[size]=720", true);
+xmlhttp.open("GET", "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v2/accounting/od/debt_outstanding?sort=-record_date&page[number]=1&page[size]=300", true);
 xmlhttp.send(); 
 //Called once the HTTP requests are finished
 function done(){
-  var currentDebt = +theData[0].tot_pub_debt_out_amt;
+  var currentDebt = +theData[0].debt_outstanding_amt;
   var changeOfDebt = 0;
 	for(i = 0; i < theData.length-1; i++){
-    var current = +theData[i].tot_pub_debt_out_amt;
-    var prev = +theData[i+1].tot_pub_debt_out_amt;
+    var current = +theData[i].debt_outstanding_amt;
+    var prev = +theData[i+1].debt_outstanding_amt;
     changeOfDebt += (current - prev);
   }
   var avgChangeOfDebt = changeOfDebt/720;

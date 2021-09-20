@@ -29,7 +29,7 @@ xmlhttp.onreadystatechange = function() {
    		xmlhttp2.send(); 
   	}
 };
-xmlhttp.open("GET", "https://www.transparency.treasury.gov/services/api/fiscal_service/v1/accounting/od/debt_outstanding?sort=-data_date&page[number]=1&page[size]=300", true);
+xmlhttp.open("GET", "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v2/accounting/od/debt_outstanding?sort=-record_date&page[number]=1&page[size]=720", true);
 xmlhttp.send(); 
 //Called once HTTP requests have finished
 function done(){
@@ -71,17 +71,17 @@ function done(){
 				  }
 			};
 	for (i = 0; i < theData.length; i++) {
-		if(Number(theData[i].reporting_calendar_year)<=1860){
-			graphData.x.push(theData[i].reporting_calendar_year);
+		if(Number(theData[i].record_calendar_year)<=1860){
+			graphData.x.push(theData[i].record_calendar_year);
 			graphData.y.push(theData[i].debt_outstanding_amt);
-		} else if(Number(theData[i].reporting_calendar_year)<=1940){
-			graphData2.x.push(theData[i].reporting_calendar_year);
+		} else if(Number(theData[i].record_calendar_year)<=1940){
+			graphData2.x.push(theData[i].record_calendar_year);
 			graphData2.y.push(theData[i].debt_outstanding_amt);
-		} else if(Number(theData[i].reporting_calendar_year)<=1980){
-			graphData3.x.push(theData[i].reporting_calendar_year);
+		} else if(Number(theData[i].record_calendar_year)<=1980){
+			graphData3.x.push(theData[i].record_calendar_year);
 			graphData3.y.push(theData[i].debt_outstanding_amt);
 		} else {
-			graphData4.x.push(theData[i].reporting_calendar_year);
+			graphData4.x.push(theData[i].record_calendar_year);
 			graphData4.y.push(theData[i].debt_outstanding_amt);
 		}
 	} 

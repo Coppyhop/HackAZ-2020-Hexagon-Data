@@ -30,7 +30,7 @@ xmlhttp.onreadystatechange = function() {
    		xmlhttp2.send(); 
   	}
 };
-xmlhttp.open("GET", "https://www.transparency.treasury.gov/services/api/fiscal_service/v1/accounting/od/debt_outstanding?sort=-data_date&page[number]=1&page[size]=300", true);
+xmlhttp.open("GET", "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v2/accounting/od/debt_outstanding?sort=-record_date&page[number]=1&page[size]=720", true);
 xmlhttp.send(); 
 //Adds money to a specific party's tally based on the date range given
 function addRange(party, date1, date2){
@@ -38,22 +38,26 @@ function addRange(party, date1, date2){
 	var day2;
 	var i;
 	for(i=0; i<theData.length;i++){
-		if(theData[i].reporting_calendar_year == date1){
+		if(theData[i].record_calendar_year == date1){
 			day1= theData[i].debt_outstanding_amt;
 		}
-		if(theData[i].reporting_calendar_year == date2){
+		if(theData[i].record_calendar_year == date2){
 			day2= theData[i].debt_outstanding_amt;
 		}
 	}
 	var total = day2 - day1;
+	if(!isNaN(total)){
 	if(party==0){
-		dem+=total;
+		console.log("Old Dem:" + dem);
+		dem+=(total/1000000);
+		console.log("New Dem:" + dem);
 	}
 	if(party==1){
-		gop+=total;
+		gop+=(total/1000000);
 	}
 	if(party==2){
-		mis+=total;
+		mis+=(total/1000000);
+	}
 	}
 }
 //Called once the two http requests are finished
@@ -69,7 +73,7 @@ function done(){
 				}
 		};
 	for (i = 0; i < theData.length; i++) {
-		graphData.x.push(theData[i].reporting_calendar_year);
+		graphData.x.push(theData[i].record_calendar_year);
 		graphData.y.push(theData[i].debt_outstanding_amt);
 	} 
 	var layout = {
@@ -96,9 +100,9 @@ function done(){
 		for(i = 0; i < presData.length; i++){
 			var startDate = presData[i].took_office.substring(0,4);
 			var endDate = presData[i].left_office;
-			var party = presData[i].party
+			var party = presData[i].party;
 			if(endDate == null){
-				endDate = "2019";
+				endDate = "2022";
 			}
 			else{
 				endDate = endDate.substring(0,4)
@@ -145,9 +149,7 @@ function done(){
 			else if(party == "Whig"){
 				rect.fillcolor = "#f2d707";
 				addRange(2, startDate, endDate);
-			} else {
-				//addRange(2, startDate, endDate);
-			}
+			} 
 			allShapes.push(rect);
 			allShapes.push(rect_line);
 		}

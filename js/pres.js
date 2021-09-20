@@ -19,10 +19,10 @@ function addRange(date1, date2){
 	var day2;
 	var i;
 	for(i=0; i<theData.length;i++){
-		if(theData[i].reporting_calendar_year == date1){
+		if(theData[i].record_calendar_year == date1){
 			day1= theData[i].debt_outstanding_amt;
 		}
-		if(theData[i].reporting_calendar_year == date2){
+		if(theData[i].record_calendar_year == date2){
 			day2= theData[i].debt_outstanding_amt;
 		}
 	}
@@ -45,7 +45,7 @@ xmlhttp.onreadystatechange = function() {
    xmlhttp2.send(); 
   }
 };
-xmlhttp.open("GET", "https://www.transparency.treasury.gov/services/api/fiscal_service/v1/accounting/od/debt_outstanding?sort=-data_date&page[number]=1&page[size]=300", true);
+xmlhttp.open("GET", "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v2/accounting/od/debt_outstanding?sort=-record_date&page[number]=1&page[size]=720", true);
 xmlhttp.send(); 
 //Attaches a listener to update the position of the label for the name
 window.onload = function(){
@@ -92,8 +92,8 @@ function done(){
 				  }
 			};
 	for (i = 0; i < theData.length; i++) {
-		graphData.x.push(theData[i].reporting_calendar_year);
-		graphData.president.push(getPres(theData[i].reporting_calendar_year));
+		graphData.x.push(theData[i].record_calendar_year);
+		graphData.president.push(getPres(theData[i].record_calendar_year));
 		graphData.y.push(theData[i].debt_outstanding_amt);
 	} 
 	var layout = {
