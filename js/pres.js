@@ -22,11 +22,12 @@ function addRange(date1, date2){
 		if(theData[i].record_calendar_year == date1){
 			day1= theData[i].debt_outstanding_amt;
 		}
-		if(theData[i].record_calendar_year == date2){
+		if(theData[i].record_calendar_year == date2-1){
 			day2= theData[i].debt_outstanding_amt;
 		}
 	}
 	var total = day2 - day1;
+	console.log(date1 + " to " + date2 + ": " + total + "(" + day2 + " - " + day1 + ")");
 	presMoney.push(total);
 }
 //Http requests
@@ -62,18 +63,16 @@ window.onload = function(){
 }
 //Returns the president in the given year
 function getPres(year){
-	console.log(year);
 	for(i = 0; i < presData.length; i++){
 		var startDate = presData[i].took_office.substring(0,4);
 		var endDate = presData[i].left_office;
 		if(endDate == null){
-				endDate = '2019';
+				endDate = '2022';
 		}
 		else{
 			endDate = endDate.substring(0,4)
 		}
 		if( +year >= +startDate && +year <= +endDate){
-			console.log(presData[i].president)
 			return presData[i].president
 		}
 	}
@@ -122,7 +121,7 @@ function done(){
 			var startDate = presData[i].took_office.substring(0,4);
 			var endDate = presData[i].left_office;
 			if(endDate == null){
-				endDate = "2019";
+				endDate = "2022";
 			}
 			else{
 				endDate = endDate.substring(0,4)

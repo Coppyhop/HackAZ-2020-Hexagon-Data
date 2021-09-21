@@ -41,16 +41,14 @@ function addRange(party, date1, date2){
 		if(theData[i].record_calendar_year == date1){
 			day1= theData[i].debt_outstanding_amt;
 		}
-		if(theData[i].record_calendar_year == date2){
+		if(theData[i].record_calendar_year == date2-1){
 			day2= theData[i].debt_outstanding_amt;
 		}
 	}
 	var total = day2 - day1;
 	if(!isNaN(total)){
 	if(party==0){
-		console.log("Old Dem:" + dem);
 		dem+=(total/1000000);
-		console.log("New Dem:" + dem);
 	}
 	if(party==1){
 		gop+=(total/1000000);
